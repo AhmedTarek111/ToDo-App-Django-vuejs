@@ -117,7 +117,7 @@ export default {
         else {
            
           axios({
-            url:'http://127.0.0.1:8000/update/'+this.editedtask,
+            url:'http://127.0.0.1:8000/editTask/'+this.editedtask,
             method:'put',
             data:{
               task:this.TaskText
@@ -134,7 +134,7 @@ export default {
     deleteTask(index){
       axios({
         method:'delete',
-        url:'http://127.0.0.1:8000/delete/'+index,
+        url:'http://127.0.0.1:8000/editTask/'+index,
 
       }).then(()=>this.listapitasks());
      
@@ -142,7 +142,7 @@ export default {
     edit(index) {
       axios({
         method: 'PATCH',
-        url: 'http://127.0.0.1:8000/update/' + index,
+        url: 'http://127.0.0.1:8000/editTask/' + index,
       }).then(response => {
         this.TaskText = response.data.task;
         this.editedtask = index;
@@ -152,7 +152,7 @@ export default {
 
     changestatus(index){
     axios({
-      url: 'http://127.0.0.1:8000/update/' + index,
+      url: 'http://127.0.0.1:8000/editTask/' + index,
       method: 'patch',
     }).then(() => {
       const task = this.apidata.find(task => task.id === index);
@@ -160,7 +160,7 @@ export default {
         const currentIndex = this.avilablestatus.indexOf(task.status);
         const newIndex = (currentIndex + 1) % this.avilablestatus.length;
         axios({
-          url: 'http://127.0.0.1:8000/update/' + index,
+          url: 'http://127.0.0.1:8000/editTask/' + index,
           method: 'patch',
           data: {
             status: this.avilablestatus[newIndex]
@@ -174,7 +174,7 @@ export default {
 
     done(index) {
       axios({
-        url: 'http://127.0.0.1:8000/update/'+ index,
+        url: 'http://127.0.0.1:8000/editTask/'+ index,
         method:'patch',
         data:{
           status:'Done'
